@@ -1,0 +1,163 @@
+#include <stdio.h>
+#include <string.h>
+
+// ex1
+// long long fatorial(int numero) {
+//     if (numero == 0 || numero == 1) {
+//         return 1; 
+//     }
+//     return numero * fatorial(numero - 1); 
+// }
+
+// int main() {
+//     int num2;
+    
+//     printf("Digite um número inteiro não negativo: ");
+//     scanf("%d", &num2);
+    
+//     if (num2 < 0) {
+//         printf("O fatorial não está definido para números negativos.\n");
+//     } else {
+//         printf("Fatorial de %d é %lld\n", num2, fatorial(num2));
+//     }
+    
+//     return 0;
+// }
+
+//// ex2
+
+// int soma(int n) {
+    
+//     if (n == 1) {
+//         return 1;
+//     }
+    
+//     return n + soma(n - 1);
+// }
+
+// int main() {
+//     int n;
+//     printf("Digite um número: ");
+//     scanf("%d", &n);
+
+//     int resul = soma(n);
+//     printf("A soma dos primeiros %d números naturais é: %d\n", n, resul);
+    
+//     return 0;
+// }
+
+////// ex 3
+// int fibo(int n) {
+    
+//     if (n == 0) {
+//         return 0;
+//     } else if (n == 1) {
+//         return 1;
+//     }
+    
+//     return fibo(n - 1) + fibo(n - 2);
+// }
+
+// int main() {
+//     int n;
+    
+   
+//     printf("Digite o valor de n: ");
+//     scanf("%d", &n);
+
+    
+//     printf("Fibonacci(%d) = %d\n", n, fibo(n));
+    
+//     return 0;
+// }
+
+
+///// ex4
+// int pot(int x, int n) {
+    
+//     if (n == 0) {
+//         return 1;
+//     }
+
+    
+//     if (n % 2 != 0) {
+//         return x * pote(x, n - 1);
+//     }
+
+    
+//     int re = pote(x, n / 2);
+//     return re * re;
+// }
+
+// int main() {
+//     int x = 2;
+//     int n = 5;
+    
+//     printf("%d^%d = %d\n", x, n, pote(x, n));
+//     return 0;
+// }
+
+////// ex5
+// void contagem(int n) {
+//     if (n < 0) {
+//         return;  
+//     }
+//     printf("%d", n);  
+//     contagem(n - 1);  
+// }
+
+// int main() {
+//     int n;
+//     printf("Digite um número: ");
+//     scanf("%d", &n);  
+//     contagem(n);  
+//     return 0;
+// }
+
+//// ex 6
+// int digitos(int n) {
+    
+//     if (n == 0) {
+//         return 0;
+//     } else {
+       
+//         return n % 10 + digitos(n / 10);
+//     }
+// }
+
+// int main() {
+//     int numero;
+    
+   
+//     printf("Digite um número inteiro positivo: ");
+//     scanf("%d", &numero);
+    
+    
+//     printf("A soma dos dígitos de %d é: %d\n", numero, digitos(numero));
+    
+//     return 0;
+// }
+
+///// ex 7
+// void inverter(char *str, int comeco, int fim) {
+    
+//     if (comeco >= fim) {
+//         return;
+//     }
+    
+    
+//     char temp = str[comeco];
+//     str[comeco] = str[fim];
+//     str[fim] = temp;
+
+//     inverter(str, comeco + 1, fim - 1);
+// }
+
+// int main() {
+//     char str[] = "recursão";  
+//     inverter(str, 0, strlen(str) - 1);
+
+//     printf("String invertida: %s\n", str);
+    
+//     return 0;
+// }
