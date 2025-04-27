@@ -161,3 +161,287 @@
     
 //     return 0;
 // }
+8
+//#include <stdio.h>
+
+//int verificarPalindromo(char *texto, int inicio, int fim) {
+    if (inicio >= fim) return 1;
+    if (texto[inicio] != texto[fim]) return 0;
+    return verificarPalindromo(texto, inicio + 1, fim - 1);
+//}
+
+9
+#include <stdio.h>
+
+int mdcCalculado(int x, int y) {
+    if (y == 0) return x;
+    return mdcCalculado(y, x % y);
+}
+10
+#include <stdio.h>
+
+int multiplicarRecursivo(int x, int y) {
+    if (y == 0) return 0;
+    return x + multiplicarRecursivo(x, y - 1);
+}
+11
+#include <stdio.h>
+
+int contarOcorrencias(char *texto, char caractere) {
+    if (*texto == '\0') return 0;
+    return (*texto == caractere) + contarOcorrencias(texto + 1, caractere);
+}
+12
+#include <stdio.h>
+
+int somaElementosArray(int vetor[], int tamanho) {
+    if (tamanho == 0) return 0;
+    return vetor[tamanho - 1] + somaElementosArray(vetor, tamanho - 1);
+}
+13
+#include <stdio.h>
+
+int verificarPrimoAux(int numero, int divisor) {
+    if (divisor * divisor > numero) return 1;
+    if (numero % divisor == 0) return 0;
+    return verificarPrimoAux(numero, divisor + 1);
+}
+
+int verificarPrimo(int numero) {
+    if (numero <= 1) return 0;
+    return verificarPrimoAux(numero, 2);
+}
+14
+#include <stdio.h>
+
+void converterDecimalParaBinario(int numero) {
+    if (numero == 0) return;
+    converterDecimalParaBinario(numero / 2);
+    printf("%d", numero % 2);
+}
+15
+#include <stdio.h>
+
+void imprimirNumerosPares(int numero) {
+    if (numero < 0) return;
+    imprimirNumerosPares(numero - 2);
+    if (numero % 2 == 0) printf("%d ", numero);
+}
+16
+#include <stdio.h>
+
+void imprimirNumerosImpares(int numero) {
+    if (numero <= 0) return;
+    imprimirNumerosImpares(numero - 2);
+    if (numero % 2 != 0) printf("%d ", numero);
+}
+17
+#include <stdio.h>
+
+int buscarElementoNoArray(int vetor[], int tamanho, int valor) {
+    if (tamanho == 0) return 0;
+    if (vetor[tamanho - 1] == valor) return 1;
+    return buscarElementoNoArray(vetor, tamanho - 1, valor);
+}
+18
+#include <stdio.h>
+
+int calcularComprimento(char *texto) {
+    if (*texto == '\0') return 0;
+    return 1 + calcularComprimento(texto + 1);
+}
+19
+#include <stdio.h>
+
+void resolverTorreDeHanoi(int discos, char origem, char auxiliar, char destino) {
+    if (discos == 1) {
+        printf("Mover disco 1 de %c para %c\n", origem, destino);
+        return;
+    }
+    resolverTorreDeHanoi(discos - 1, origem, destino, auxiliar);
+    printf("Mover disco %d de %c para %c\n", discos, origem, destino);
+    resolverTorreDeHanoi(discos - 1, auxiliar, origem, destino);
+}
+20
+#include <stdio.h>
+#include <string.h>
+
+void trocar(char *a, char *b) {
+    char temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void gerarPermutacoes(char *texto, int inicio, int fim) {
+    if (inicio == fim) {
+        printf("%s\n", texto);
+        return;
+    }
+    for (int i = inicio; i <= fim; i++) {
+        trocar((texto + inicio), (texto + i));
+        gerarPermutacoes(texto, inicio + 1, fim);
+        trocar((texto + inicio), (texto + i)); // backtrack
+    }
+}
+21
+#include <stdio.h>
+
+void gerarCombinacoes(int vetor[], int tamanho, int k, int indice, int dados[], int i) {
+    if (indice == k) {
+        for (int j = 0; j < k; j++) printf("%d ", dados[j]);
+        printf("\n");
+        return;
+    }
+    if (i >= tamanho) return;
+
+    dados[indice] = vetor[i];
+    gerarCombinacoes(vetor, tamanho, k, indice + 1, dados, i + 1);
+    gerarCombinacoes(vetor, tamanho, k, indice, dados, i + 1);
+}
+22
+#include <stdio.h>
+
+void gerarSubconjuntos(int vetor[], int tamanho, int indice, int subconjunto[], int tamanhoSubconjunto) {
+    if (indice == tamanho) {
+        printf("{ ");
+        for (int i = 0; i < tamanhoSubconjunto; i++) printf("%d ", subconjunto[i]);
+        printf("}\n");
+        return;
+    }
+    subconjunto[tamanhoSubconjunto] = vetor[indice];
+    gerarSubconjuntos(vetor, tamanho, indice + 1, subconjunto, tamanhoSubconjunto + 1);
+    gerarSubconjuntos(vetor, tamanho, indice + 1, subconjunto, tamanhoSubconjunto);
+}
+23
+#include <stdio.h>
+
+void fundir(int vetor[], int inicio, int meio, int fim) {
+    int i, j, k;
+    int n1 = meio - inicio + 1;
+    int n2 = fim - meio;
+    int L[n1], R[n2];
+
+    for (i = 0; i < n1; i++) L[i] = vetor[inicio + i];
+    for (j = 0; j < n2; j++) R[j] = vetor[meio + 1+ j];
+
+    i = 0; j = 0; k = inicio;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) vetor[k++] = L[i++];
+        else vetor[k++] = R[j++];
+    }
+    while (i < n1) vetor[k++] = L[i++];
+    while (j < n2) vetor[k++] = R[j++];
+}
+
+void mergeSort(int vetor[], int inicio, int fim) {
+    if (inicio < fim) {
+        int meio = (inicio + fim) / 2;
+        mergeSort(vetor, inicio, meio);
+        mergeSort(vetor, meio + 1, fim);
+        fundir(vetor, inicio, meio, fim);
+    }
+}
+24
+#include <stdio.h>
+
+int particionar(int vetor[], int baixo, int alto) {
+    int pivo = vetor[alto], i = baixo - 1, temp;
+    for (int j = baixo; j < alto; j++) {
+        if (vetor[j] < pivo) {
+            i++;
+            temp = vetor[i]; vetor[i] = vetor[j]; vetor[j] = temp;
+        }
+    }
+    temp = vetor[i + 1]; vetor[i + 1] = vetor[alto]; vetor[alto] = temp;
+    return i + 1;
+}
+
+void quickSort(int vetor[], int baixo, int alto) {
+    if (baixo < alto) {
+        int pivo = particionar(vetor, baixo, alto);
+        quickSort(vetor, baixo, pivo - 1);
+        quickSort(vetor, pivo + 1, alto);
+    }
+}
+25
+#include <stdio.h>
+
+int buscaBinaria(int vetor[], int inicio, int fim, int valor) {
+    if (inicio > fim) return -1;
+    int meio = (inicio + fim) / 2;
+    if (vetor[meio] == valor) return meio;
+    if (vetor[meio] > valor) return buscaBinaria(vetor, inicio, meio - 1, valor);
+    else return buscaBinaria(vetor, meio + 1, fim, valor);
+}
+26
+#include <stdio.h>
+
+int exponenciacaoRapida(int base, int expoente) {
+    if (expoente == 0) return 1;
+    if (expoente % 2 == 0) {
+        int meio = exponenciacaoRapida(base, expoente / 2);
+        return meio * meio;
+    } else {
+        return base * exponenciacaoRapida(base, expoente - 1);
+    }
+}
+27
+#include <stdio.h>
+
+void caminhoMatriz(int linha, int coluna, int destinoX, int destinoY) {
+    if (linha > destinoX || coluna > destinoY) return;
+    if (linha == destinoX && coluna == destinoY) {
+        printf("(%d,%d)\n", linha, coluna);
+        return;
+    }
+    printf("(%d,%d) -> ", linha, coluna);
+    caminhoMatriz(linha, coluna + 1, destinoX, destinoY);
+    caminhoMatriz(linha + 1, coluna, destinoX, destinoY);
+}
+28
+#include <stdio.h>
+
+#define N 4
+
+int tabuleiro[N][N];
+
+int podeColocar(int linha, int coluna) {
+    for (int i = 0; i < linha; i++)
+        if (tabuleiro[i][coluna]) return 0;
+    for (int i = linha, j = coluna; i >= 0 && j >= 0; i--, j--)
+        if (tabuleiro[i][j]) return 0;
+    for (int i = linha, j = coluna; i >= 0 && j < N; i--, j++)
+        if (tabuleiro[i][j]) return 0;
+    return 1;
+}
+
+void mostrarTabuleiro() {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            printf(tabuleiro[i][j] ? "Q " : ". ");
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+void resolverTabuleiro(int linha) {
+    if (linha == N) {
+        mostrarTabuleiro();
+        return;
+    }
+    for (int i = 0; i < N; i++) {
+        if (podeColocar(linha, i)) {
+            tabuleiro[linha][i] = 1;
+            resolverTabuleiro(linha + 1);
+            tabuleiro[linha][i] = 0; // backtrack
+        }
+    }
+}
+
+int main() {
+    resolverTabuleiro(0);
+    return 0;
+}
+
+
